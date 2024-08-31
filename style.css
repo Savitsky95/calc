@@ -16,27 +16,27 @@ body {
 
 .allbody {
     display: grid;
-    width: 80%; /* Сделаем ширину относительной */
-    max-width: 700px; /* Максимальная ширина 700px */
+    width: 80%; 
+    max-width: 700px; 
     margin: 0 auto;
     justify-content: center;
     justify-items: center;
-    padding: 20px; /* Добавим отступы для мелких экранов */
+    padding: 20px; 
 }
 
 h1 {
-    font-size: 2rem; /* Размер заголовка */
+    font-size: 2rem; 
     text-align: center;
 }
 
 label {
-    font-size: 1rem; /* Размер текста */
+    font-size: 1rem; 
     margin-bottom: 10px;
 }
 
 input {
     padding: 10px; /* Увеличим отступы */
-    font-size: 1rem; /* Размер шрифта */
+    font-size: 0.8rem; /* Размер шрифта */
     width: 100%; /* Ширина input на всю ширину контейнера */
     box-sizing: border-box; /* Учитываем отступы внутри ширины */
 }
