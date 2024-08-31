@@ -10,9 +10,14 @@
         input { margin-bottom: 10px; padding: 5px; width: 200px; }
         .result { margin-top: 20px; }
     </style>
+      <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/modern-normalize.css">
 </head>
 <body>
-
+<div class="allbody">
 <h1>Калькулятор выполнения плана</h1>
 
 <label for="plan">Введите план (грн):</label>
@@ -21,7 +26,7 @@
 <label for="fact">Введите факт (грн):</label>
 <input type="number" id="fact" placeholder="Факт" />
 
-<button onclick="calculate()">Рассчитать</button>
+<button onclick="calculate()" class="interactive">Рассчитать</button>
 
 <div class="result">
     <h3>Результаты:</h3>
@@ -32,6 +37,7 @@
     <p id="daysWithoutToday"></p>
     <p id="daysWithToday98"></p>
     <p id="daysWithoutToday98"></p>
+</div>
 </div>
 
 <script>
@@ -63,8 +69,6 @@
 
         document.getElementById('daysWithToday').textContent = `Сумма на день с учетом сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн.`;
         document.getElementById('daysWithoutToday').textContent = `Сумма на день без учета сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн.`;
-        document.getElementById('daysWithToday98').textContent = `Сумма на день с учетом сегодняшнего дня (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн.`;
-        document.getElementById('daysWithoutToday98').textContent = `Сумма на день без учета сегодняшнего дня (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн.`;
     }
 </script>
 
