@@ -16,7 +16,6 @@ body {
 .allbody {
     display: grid;
     width: 700px;
-    height: auto;
     margin: 0 auto;
     justify-content: center;
     justify-items: center;
@@ -27,11 +26,11 @@ body {
     border-radius: 8px;
     width: 150px;
     transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: crosshair;
+    cursor: pointer;
 }
 .interactive:focus,
 .interactive:hover {
-    background-color: cadetblue;
+    background-color: rgb(41, 121, 101);
 }
 .result {
     margin-top: 0;
