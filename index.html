@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор плана</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        label { display: block; margin-bottom: 5px; }
+        input { margin-bottom: 10px; padding: 5px; width: 200px; }
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>Калькулятор выполнения плана</h1>
+
+<label for="plan">Введите план (грн):</label>
+<input type="number" id="plan" placeholder="План" />
+
+<label for="fact">Введите факт (грн):</label>
+<input type="number" id="fact" placeholder="Факт" />
+
+<button onclick="calculate()">Рассчитать</button>
+
+<div class="result">
+    <h3>Результаты:</h3>
+    <p id="result100"></p>
+    <p id="result98"></p>
+    <p id="result95"></p>
+    <p id="daysWithToday"></p>
+    <p id="daysWithoutToday"></p>
+</div>
+
+<script>
+    function calculate() {
+        const plan = parseFloat(document.getElementById('plan').value);
+        const fact = parseFloat(document.getElementById('fact').value);
+
+        if (isNaN(plan) || isNaN(fact)) {
+            alert("Пожалуйста, введите корректные числа");
+            return;
+        }
+
+        const remaining100 = plan - fact;
+        const remaining98 = (plan * 0.98) - fact;
+        const remaining95 = (plan * 0.95) - fact;
+
+        const today = new Date();
+        const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+        const daysLeftIncludingToday = daysInMonth - today.getDate() + 1;
+        const daysLeftExcludingToday = daysInMonth - today.getDate();
+
+        document.getElementById('result100').textContent = `Осталось до 100%: ${remaining100.toFixed(2)} грн.`;
+        document.getElementById('result98').textContent = `Осталось до 98%: ${remaining98.toFixed(2)} грн.`;
+        document.getElementById('result95').textContent = `Осталось до 95%: ${remaining95.toFixed(2)} грн.`;
+
+        document.getElementById('daysWithToday').textContent = `Сумма на день с учетом сегодняшнего дня (95%): ${(remaining95 / daysLeftIncludingToday).toFixed(2)} грн. / (98%): ${(remaining98 / daysLeftIncludingToday).toFixed(2)} грн.`;
+        document.getElementById('daysWithoutToday').textContent = `Сумма на день без учета сегодняшнего дня (95%): ${(remaining95 / daysLeftExcludingToday).toFixed(2)} грн. / (98%): ${(remaining98 / daysLeftExcludingToday).toFixed(2)} грн.`;
+        document.getElementById('daysWithToday98').textContent = `Сумма на день с учетом сегодняшнего дня (98%): ${(remaining98 / daysLeftIncludingToday).toFixed(2)} грн.`;
+        document.getElementById('daysWithoutToday98').textContent = `Сумма на день без учета сегодняшнего дня (98%): ${(remaining98 / daysLeftExcludingToday).toFixed(2)} грн.`;
+    }
+</script>
+
+</body>
+</html>
