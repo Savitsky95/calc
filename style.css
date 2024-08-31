@@ -2,55 +2,53 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; 
 }
 
-body {
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Высота экрана */
     background-image: url(./image/apteka-1200x580_LE_auto_x2.jpg);
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    margin: 0;
-    padding: 0;
-    font-family: 'Raleway', 'Roboto', sans-serif;
+    background-size: contain; /* Масштабируем изображение так, чтобы оно полностью помещалось в контейнер */
+    background-position: center; /* Центрируем изображение */
+    background-repeat: no-repeat; /* Избегаем повторения изображения */
+    background-color: #f0f0f0; /* Фоновый цвет для ситуации, когда изображение не занимает весь экран */
 }
 
 .allbody {
     display: grid;
-    width: 80%; 
-    max-width: 700px; 
-    margin: 0 auto;
-    justify-content: center;
-    justify-items: center;
-    padding: 20px; 
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон для читаемости */
 }
 
 h1 {
-    font-size: 2rem; 
+    font-size: 2rem;
     text-align: center;
 }
 
 label {
-    font-size: 1rem; 
+    font-size: 1rem;
     margin-bottom: 10px;
 }
 
 input {
-    padding: 10px; /* Увеличим отступы */
-    font-size: 0.8rem; /* Размер шрифта */
-    width: 100%; /* Ширина input на всю ширину контейнера */
-    box-sizing: border-box; /* Учитываем отступы внутри ширины */
+    padding: 10px;
+    font-size: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .interactive {
     margin-top: 20px;
     border-radius: 8px;
-    width: 100%; /* Кнопка на всю ширину контейнера */
-    padding: 10px; /* Добавим отступы */
-    font-size: 1rem; /* Размер текста */
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
-                color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+                color 250ms cubic-bezier(0.4, 0, 0.2, 1),
                 box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
 }
@@ -68,7 +66,6 @@ input {
 }
 
 /* Медиа-запросы для адаптивности */
-
 @media (max-width: 768px) {
     h1 {
         font-size: 1.5rem;
@@ -85,4 +82,12 @@ input {
 }
 
 @media (max-width: 480px) {
-    h
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    input, .interactive {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+}

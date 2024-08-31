@@ -4,73 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор плана</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        label { display: block; margin-bottom: 5px; }
-        input { margin-bottom: 10px; padding: 5px; width: 200px; }
-        .result { margin-top: 20px; }
-    </style>
-      <link
-      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto:wght@400;500;700;900&display=swap"
-      rel="stylesheet">
-      <link rel="stylesheet" href="./style.css">
-      <link rel="stylesheet" href="./modern-normalize.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="allbody">
-<h1>Калькулятор выполнения плана</h1>
-
-<label for="plan">Введите план (грн):</label>
-<input type="number" id="plan" placeholder="План" />
-
-<label for="fact">Введите факт (грн):</label>
-<input type="number" id="fact" placeholder="Факт" />
-
-<button onclick="calculate()" class="interactive">Рассчитать</button>
-
-<div class="result">
-    <h3>Результаты:</h3>
-    <p id="result100"></p>
-    <p id="result98"></p>
-    <p id="result95"></p>
-    <p id="daysWithToday"></p>
-    <p id="daysWithoutToday"></p>
-    <p id="daysWithToday98"></p>
-    <p id="daysWithoutToday98"></p>
-</div>
-</div>
-
-<script>
-    function safeDivide(numerator, denominator) {
-        return denominator === 0 ? 0 : (numerator / denominator).toFixed(2);
-    }
-
-    function calculate() {
-        const plan = parseFloat(document.getElementById('plan').value);
-        const fact = parseFloat(document.getElementById('fact').value);
-
-        if (isNaN(plan) || isNaN(fact)) {
-            alert("Пожалуйста, введите корректные числа");
-            return;
+    <div class="container">
+        <div class="allbody">
+            <h1>Калькулятор выполнения плана</h1>
+            <label for="plan">Введите план (грн):</label>
+            <input type="number" id="plan" placeholder="План" />
+            <label for="fact">Введите факт (грн):</label>
+            <input type="number" id="fact" placeholder="Факт" />
+            <button onclick="calculate()" class="interactive">Рассчитать</button>
+            <div class="result">
+                <h3>Результаты:</h3>
+                <p id="result100"></p>
+                <p id="result98"></p>
+                <p id="result95"></p>
+                <p id="daysWithToday"></p>
+                <p id="daysWithoutToday"></p>
+                <p id="daysWithToday98"></p>
+                <p id="daysWithoutToday98"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function safeDivide(numerator, denominator) {
+            return denominator === 0 ? 0 : (numerator / denominator).toFixed(2);
         }
 
-        const remaining100 = plan - fact;
-        const remaining98 = (plan * 0.98) - fact;
-        const remaining95 = (plan * 0.95) - fact;
+        function calculate() {
+            const plan = parseFloat(document.getElementById('plan').value);
+            const fact = parseFloat(document.getElementById('fact').value);
 
-        const today = new Date();
-        const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-        const daysLeftIncludingToday = daysInMonth - today.getDate() + 1;
-        const daysLeftExcludingToday = daysInMonth - today.getDate();
+            if (isNaN(plan) || isNaN(fact)) {
+                alert("Пожалуйста, введите корректные числа");
+                return;
+            }
 
-        document.getElementById('result100').textContent = `Осталось до 100%: ${remaining100.toFixed(2)} грн.`;
-        document.getElementById('result98').textContent = `Осталось до 98%: ${remaining98.toFixed(2)} грн.`;
-        document.getElementById('result95').textContent = `Осталось до 95%: ${remaining95.toFixed(2)} грн.`;
+            const remaining100 = plan - fact;
+            const remaining98 = (plan * 0.98) - fact;
+            const remaining95 = (plan * 0.95) - fact;
 
-        document.getElementById('daysWithToday').textContent = `Сумма на день с учетом сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн.`;
-        document.getElementById('daysWithoutToday').textContent = `Сумма на день без учета сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн.`;
-    }
-</script>
+            const today = new Date();
+            const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+            const daysLeftIncludingToday = daysInMonth - today.getDate() + 1;
+            const daysLeftExcludingToday = daysInMonth - today.getDate();
 
+            document.getElementById('result100').textContent = `Осталось до 100%: ${remaining100.toFixed(2)} грн.`;
+            document.getElementById('result98').textContent = `Осталось до 98%: ${remaining98.toFixed(2)} грн.`;
+            document.getElementById('result95').textContent = `Осталось до 95%: ${remaining95.toFixed(2)} грн.`;
+
+            document.getElementById('daysWithToday').textContent = `Сумма на день с учетом сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн.`;
+            document.getElementById('daysWithoutToday').textContent = `Сумма на день без учета сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн.`;
+        }
+    </script>
 </body>
 </html>
