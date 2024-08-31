@@ -30,9 +30,15 @@
     <p id="result95"></p>
     <p id="daysWithToday"></p>
     <p id="daysWithoutToday"></p>
+    <p id="daysWithToday98"></p>
+    <p id="daysWithoutToday98"></p>
 </div>
 
 <script>
+    function safeDivide(numerator, denominator) {
+        return denominator === 0 ? 0 : (numerator / denominator).toFixed(2);
+    }
+
     function calculate() {
         const plan = parseFloat(document.getElementById('plan').value);
         const fact = parseFloat(document.getElementById('fact').value);
@@ -55,10 +61,10 @@
         document.getElementById('result98').textContent = `Осталось до 98%: ${remaining98.toFixed(2)} грн.`;
         document.getElementById('result95').textContent = `Осталось до 95%: ${remaining95.toFixed(2)} грн.`;
 
-        document.getElementById('daysWithToday').textContent = `Сумма на день с учетом сегодняшнего дня (95%): ${(remaining95 / daysLeftIncludingToday).toFixed(2)} грн. / (98%): ${(remaining98 / daysLeftIncludingToday).toFixed(2)} грн.`;
-        document.getElementById('daysWithoutToday').textContent = `Сумма на день без учета сегодняшнего дня (95%): ${(remaining95 / daysLeftExcludingToday).toFixed(2)} грн. / (98%): ${(remaining98 / daysLeftExcludingToday).toFixed(2)} грн.`;
-        document.getElementById('daysWithToday98').textContent = `Сумма на день с учетом сегодняшнего дня (98%): ${(remaining98 / daysLeftIncludingToday).toFixed(2)} грн.`;
-        document.getElementById('daysWithoutToday98').textContent = `Сумма на день без учета сегодняшнего дня (98%): ${(remaining98 / daysLeftExcludingToday).toFixed(2)} грн.`;
+        document.getElementById('daysWithToday').textContent = `Сумма на день с учетом сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн.`;
+        document.getElementById('daysWithoutToday').textContent = `Сумма на день без учета сегодняшнего дня (95%): ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн.`;
+        document.getElementById('daysWithToday98').textContent = `Сумма на день с учетом сегодняшнего дня (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн.`;
+        document.getElementById('daysWithoutToday98').textContent = `Сумма на день без учета сегодняшнего дня (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн.`;
     }
 </script>
 
