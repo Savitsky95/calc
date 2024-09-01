@@ -15,6 +15,7 @@
             <label for="fact">Введіть факт (грн):</label>
             <input type="number" id="fact" placeholder="Факт" />
             <button onclick="calculateTO()" class="interactive">Розрахувати</button>
+            
             <!-- Кнопка перехода ко второй странице -->
             <button onclick="window.location.href='vtm_calculator.html'" class="interactive">Перейти на калькулятор ВТМ</button>
         </div>
@@ -79,9 +80,9 @@
 
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(resultText)}`;
-            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
-            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
+            document.getElementById('share-viber').href = `viber://forward?text=${encodeURI(resultText)}`;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURI(resultText)}`;
+            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURI(resultText)}`;
 
             document.getElementById('resultModal').style.display = "block";
         }

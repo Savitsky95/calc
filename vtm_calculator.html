@@ -64,11 +64,11 @@
 
             const currentPercentage = plan === 0 ? 0 : ((fact / plan) * 100).toFixed(2);
 
-            const resultText = `Виконання ВТМ:\n` +
+            const resultText = `Виконання плану ВТМ:\n` +
                 `Залишилось до 100%: ${remaining100.toFixed(2)} грн.\n` +
                 `Залишилось до 98%: ${remaining98.toFixed(2)} грн.\n` +
-                `Сума на день (включно сьогодні): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
-                `Сума на день (без сьогодні): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
+                `Сума на день (включно сьогодні) (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
+                `Сума на день (без сьогодні) (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
                 `Виконання плану: ${currentPercentage}%`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
@@ -79,9 +79,9 @@
 
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(resultText)}`;
-            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
-            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
+            document.getElementById('share-viber').href = `viber://forward?text=${encodeURI(resultText)}`;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURI(resultText)}`;
+            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURI(resultText)}`;
 
             document.getElementById('resultModal').style.display = "block";
         }
