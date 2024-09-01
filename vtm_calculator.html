@@ -15,7 +15,7 @@
             <label for="fact">Введіть факт (грн):</label>
             <input type="number" id="fact" placeholder="Факт" />
             <button onclick="calculateVTM()" class="interactive">Розрахувати</button>
-            <!-- Кнопка перехода на калькулятор ТО -->
+            <!-- Кнопка перехода на первую страницу -->
             <button onclick="window.location.href='index.html'" class="interactive">Перейти на калькулятор ТО</button>
         </div>
     </div>
@@ -88,7 +88,7 @@
                 `До 98%: ${formatCurrency(remaining98)} грн.\n` +
                 `На день (з урах. сьог.): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
                 `На день (без сьог.): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
-                `Виконано: ${currentPercentage}%`;
+                `Вик.: ${currentPercentage}%`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${formatCurrency(remaining100)} грн.`;
             document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${formatCurrency(remaining98)} грн.`;
