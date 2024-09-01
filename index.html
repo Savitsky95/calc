@@ -55,7 +55,11 @@
         }
 
         function formatPercentage(value) {
-            return `${value}%`;
+            return `${value}%25`;
+        }
+
+        function formatCurrency(value) {
+            return value >= 1e6 ? (value / 1e6).toFixed(2) + 'M' : (value / 1e3).toFixed(2) + 'K';
         }
 
         function calculateVTM() {
@@ -78,12 +82,12 @@
 
             const currentPercentage = plan === 0 ? 0 : ((fact / plan) * 100).toFixed(2);
 
-            const resultText = `Виконання ВТМ:\n` +
-                `Залишилось до 100%: ${remaining100.toFixed(2)} грн.\n` +
-                `Залишилось до 98%: ${remaining98.toFixed(2)} грн.\n` +
-                `Сума на день (з урахуванням сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
-                `Сума на день (без урахування сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
-                `Виконання плану: ${formatPercentage(currentPercentage)}`;
+            const resultText = `ВТМ:\n` +
+                `100%: - ${formatCurrency(remaining100)} грн.\n` +
+                `98%: - ${formatCurrency(remaining98)} грн.\n` +
+                `День (сегодня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
+                `День (без сегодня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
+                `Вик.: ${formatPercentage(currentPercentage)}`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
             document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${remaining98.toFixed(2)} грн.`;

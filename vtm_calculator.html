@@ -63,7 +63,6 @@
                 return;
             }
 
-            // Расчет оставшейся суммы, заменяем отрицательные значения на 0
             const remaining100 = Math.max(0, plan - fact);
             const remaining98 = Math.max(0, (plan * 0.98) - fact);
 
@@ -74,12 +73,13 @@
 
             const currentPercentage = plan === 0 ? 0 : ((fact / plan) * 100).toFixed(2);
 
-            const resultText = `Виконання ВТМ:\n` +
-                `Залишилось до 100%: ${remaining100.toFixed(2)} грн.\n` +
-                `Залишилось до 98%: ${remaining98.toFixed(2)} грн.\n` +
-                `Сума на день (з урахуванням сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
-                `Сума на день (без урахування сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
-                `Виконання плану: ${currentPercentage}%`;
+            // Сокращение текста для мессенджеров
+            const resultText = `ВТМ:\n` +
+                `До 100%: ${remaining100.toFixed(2)} грн.\n` +
+                `До 98%: ${remaining98.toFixed(2)} грн.\n` +
+                `На день (з урах. сьог.): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
+                `На день (без сьог.): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
+                `Виконано: ${currentPercentage}%`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
             document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${remaining98.toFixed(2)} грн.`;
