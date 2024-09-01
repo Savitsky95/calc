@@ -58,11 +58,9 @@
             return value >= 1e6 ? (value / 1e6).toFixed(2) + 'M' : (value / 1e3).toFixed(2) + 'K';
         }
 
-        function encodeText(text) {
-            return encodeURIComponent(text)
-                .replace(/%20/g, ' ')
-                .replace(/%25/g, '%')
-                .replace(/%2C/g, ',');
+        function formatForViber(text) {
+            return text.replace(/%/g, "%25")
+                       .replace(/,/g, "%2C");
         }
 
         function calculateVTM() {
@@ -84,16 +82,16 @@
 
             const currentPercentage = plan === 0 ? 0 : ((fact / plan) * 100).toFixed(2);
 
-            // Форматирование текста для отображения и мессенджеров
+            // Сокращение текста для мессенджеров
             const resultText = `ВТМ:\n` +
-                `До 100%: ${remaining100.toFixed(2)} грн.\n` +
-                `До 98%: ${remaining98.toFixed(2)} грн.\n` +
+                `До 100%: ${formatCurrency(remaining100)} грн.\n` +
+                `До 98%: ${formatCurrency(remaining98)} грн.\n` +
                 `На день (з урах. сьог.): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
                 `На день (без сьог.): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
                 `Виконано: ${currentPercentage}%`;
 
-            document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
-            document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${remaining98.toFixed(2)} грн.`;
+            document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${formatCurrency(remaining100)} грн.`;
+            document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${formatCurrency(remaining98)} грн.`;
 
             document.getElementById('modalDaysWithToday').textContent = `Сума на день (з урахуванням сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн. / 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.`;
             document.getElementById('modalDaysWithoutToday').textContent = `Сума на день (без урахування сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн. / 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.`;
@@ -101,9 +99,9 @@
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
             // Обновление ссылок для поделиться
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeText(resultText)}`;
-            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeText(resultText)}`;
-            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeText(resultText)}`;
+            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(formatForViber(resultText))}`;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
+            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
 
             document.getElementById('resultModal').style.display = "block";
         }
