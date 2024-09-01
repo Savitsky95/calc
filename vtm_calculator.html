@@ -5,6 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Калькулятор виконання плану ВТМ</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Добавляем стили для модального окна и кнопок */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe; 
+            margin: 15% auto; 
+            padding: 20px; 
+            border: 1px solid #888; 
+            width: 80%; 
+        }
+
+        .close {
+            color: #aaa; 
+            float: right; 
+            font-size: 28px; 
+            font-weight: bold; 
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black; 
+            text-decoration: none; 
+            cursor: pointer; 
+        }
+
+        .share-buttons {
+            margin-top: 20px;
+        }
+
+        .share-btn {
+            display: inline-block; 
+            margin: 5px; 
+            padding: 10px; 
+            text-decoration: none; 
+            color: white; 
+            border-radius: 5px; 
+            font-weight: bold; 
+        }
+
+        .viber {
+            background-color: #6e3b9a;
+        }
+
+        .telegram {
+            background-color: #0088cc;
+        }
+
+        .whatsapp {
+            background-color: #25D366;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -67,19 +130,24 @@
             const resultText = `Результати виконання плану ВТМ:\n` +
                 `Залишилось до 100%: ${remaining100.toFixed(2)} грн.\n` +
                 `Залишилось до 98%: ${remaining98.toFixed(2)} грн.\n` +
-                `Сума на день (з урахуванням сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
-                `Сума на день (без урахування сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
+                `Сума на день (з урахуванням сьогоднішнього дня):\n` +
+                `98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн.\n` +
+                `100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
+                `Сума на день (без урахування сьогоднішнього дня):\n` +
+                `98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн.\n` +
+                `100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
                 `Виконання плану: ${currentPercentage}%`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
             document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${remaining98.toFixed(2)} грн.`;
-
             document.getElementById('modalDaysWithToday').textContent = `Сума на день з урахуванням сьогодняшнього дня (98%): ${safeDivide(remaining98, daysLeftIncludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftIncludingToday)} грн.`;
             document.getElementById('modalDaysWithoutToday').textContent = `Сума на день без урахування сьогодняшнього дня (98%): ${safeDivide(remaining98, daysLeftExcludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftExcludingToday)} грн.`;
-
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(resultText)}`;
+            // Укоротить текст для Viber
+            const shortResultText = resultText.substring(0, 1000); // Укоротить до 1000 символов
+
+            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(shortResultText)}`;
             document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
             document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
 
