@@ -15,6 +15,7 @@
             <label for="fact">Введіть факт (грн):</label>
             <input type="number" id="fact" placeholder="Факт" />
             <button onclick="calculateVTM()" class="interactive">Розрахувати</button>
+            <!-- Кнопка перехода на первую страницу -->
             <button onclick="window.location.href='index.html'" class="interactive">Перейти на калькулятор ТО</button>
         </div>
     </div>
@@ -32,9 +33,9 @@
 
             <!-- Кнопки поделитися -->
             <div class="share-buttons">
-                <a id="share-viber" href="#" target="_blank" class="share-btn viber">Поділитися через Viber</a>
-                <a id="share-telegram" href="#" target="_blank" class="share-btn telegram">Поділитися через Telegram</a>
-                <a id="share-whatsapp" href="#" target="_blank" class="share-btn whatsapp">Поділитися через WhatsApp</a>
+                <a id="share-viber" class="share-btn viber" href="#" target="_blank">Поділитися через Viber</a>
+                <a id="share-telegram" class="share-btn telegram" href="#" target="_blank">Поділитися через Telegram</a>
+                <a id="share-whatsapp" class="share-btn whatsapp" href="#" target="_blank">Поділитися через WhatsApp</a>
             </div>
         </div>
     </div>
@@ -49,7 +50,7 @@
             const fact = parseFloat(document.getElementById('fact').value);
 
             if (isNaN(plan) || isNaN(fact)) {
-                alert("КОРЕКТНО ВВОДЬ!!!!!!!!");
+                alert("Будь ласка, введіть правильне число");
                 return;
             }
 
