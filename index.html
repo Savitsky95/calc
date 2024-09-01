@@ -15,7 +15,6 @@
             <label for="fact">Введіть факт (грн):</label>
             <input type="number" id="fact" placeholder="Факт" />
             <button onclick="calculateTO()" class="interactive">Розрахувати</button>
-            
             <!-- Кнопка перехода ко второй странице -->
             <button onclick="window.location.href='vtm_calculator.html'" class="interactive">Перейти на калькулятор ВТМ</button>
         </div>
@@ -25,14 +24,14 @@
     <div id="resultModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h3>Виконання ТО:</h3>
+            <h3>Результати:</h3>
             <p id="modalResult100"></p>
             <p id="modalResult95"></p>
             <p id="modalDaysWithToday"></p>
             <p id="modalDaysWithoutToday"></p>
             <p id="modalCurrentPercentage"></p>
 
-            <!-- Кнопки поделиться -->
+            <!-- Кнопки поделитися -->
             <div class="share-buttons">
                 <a id="share-viber" class="share-btn viber" href="#" target="_blank">Поділитися через Viber</a>
                 <a id="share-telegram" class="share-btn telegram" href="#" target="_blank">Поділитися через Telegram</a>
@@ -68,15 +67,15 @@
             const resultText = `Виконання ТО:\n` +
                 `Залишилось до 100%: ${remaining100.toFixed(2)} грн.\n` +
                 `Залишилось до 95%: ${remaining95.toFixed(2)} грн.\n` +
-                `Сума на день (з урахуванням сьогоднішнього дня): 95% - ${safeDivide(remaining95, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
-                `Сума на день (без урахування сьогоднішнього дня): 95% - ${safeDivide(remaining95, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
+                `Сума на день (включно сьогодні): 95% - ${safeDivide(remaining95, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
+                `Сума на день (без сьогодні): 95% - ${safeDivide(remaining95, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
                 `Виконання плану: ${currentPercentage}%`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
             document.getElementById('modalResult95').textContent = `Залишилось до 95%: ${remaining95.toFixed(2)} грн.`;
 
-            document.getElementById('modalDaysWithToday').textContent = `Сума на день з урахуванням сьогодняшнього дня (95%): ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftIncludingToday)} грн.`;
-            document.getElementById('modalDaysWithoutToday').textContent = `Сума на день без урахування сьогодняшнього дня (95%): ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftExcludingToday)} грн.`;
+            document.getElementById('modalDaysWithToday').textContent = `Сума на день (включно сьогодні) (95%): ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftIncludingToday)} грн.`;
+            document.getElementById('modalDaysWithoutToday').textContent = `Сума на день (без сьогодні) (95%): ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / 100%: ${safeDivide(remaining100, daysLeftExcludingToday)} грн.`;
 
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
