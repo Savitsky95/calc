@@ -59,8 +59,7 @@
         }
 
         function formatForViber(text) {
-            return text.replace(/%/g, "%25")
-                       .replace(/,/g, "%2C");
+            return encodeURIComponent(text);
         }
 
         function calculateTO() {
@@ -99,7 +98,7 @@
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
             // Обновление ссылок для поделиться
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(formatForViber(resultText))}`;
+            document.getElementById('share-viber').href = `viber://forward?text=${formatForViber(resultText)}`;
             document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
             document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
 
