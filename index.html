@@ -31,7 +31,7 @@
             <p id="modalDaysWithoutToday"></p>
             <p id="modalCurrentPercentage"></p>
 
-            <!-- Кнопки поделитися -->
+            <!-- Кнопки поділитися -->
             <div class="share-buttons">
                 <a id="share-viber" class="share-btn viber" href="#" target="_blank">Поділитися через Viber</a>
                 <a id="share-telegram" class="share-btn telegram" href="#" target="_blank">Поділитися через Telegram</a>
@@ -54,8 +54,8 @@
                 return;
             }
 
-            const remaining100 = plan - fact;
-            const remaining95 = (plan * 0.95) - fact;
+            const remaining100 = Math.max(plan - fact, 0);
+            const remaining95 = Math.max((plan * 0.95) - fact, 0);
 
             const today = new Date();
             const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
