@@ -54,6 +54,19 @@
             return denominator === 0 ? 0 : (numerator / denominator).toFixed(2);
         }
 
+        function formatPercentage(value) {
+            return `${value}%`;
+        }
+
+        function formatCurrency(value) {
+            return value >= 1e6 ? (value / 1e6).toFixed(2) + 'M' : (value / 1e3).toFixed(2) + 'K';
+        }
+
+        function formatForViber(text) {
+            return text.replace(/%/g, "%25")
+                       .replace(/,/g, "%2C");
+        }
+
         function calculateVTM() {
             const plan = parseFloat(document.getElementById('plan').value);
             const fact = parseFloat(document.getElementById('fact').value);
@@ -90,7 +103,7 @@
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
             // Обновление ссылок для поделиться
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(resultText)}`;
+            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(formatForViber(resultText))}`;
             document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
             document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
 
