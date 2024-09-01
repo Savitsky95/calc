@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Калькулятор виконання плану ВТМ</title>
+    <title>Калькулятор виконання плану ТО</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="allbody">
-            <h1>Калькулятор виконання плану ВТМ</h1>
+            <h1>Калькулятор виконання плану ТО</h1>
             <label for="plan">Введіть план (грн):</label>
             <input type="number" id="plan" placeholder="План" />
             <label for="fact">Введіть факт (грн):</label>
             <input type="number" id="fact" placeholder="Факт" />
-            <button onclick="calculateVTM()" class="interactive">Розрахувати</button>
-            <!-- Кнопка перехода на первую страницу -->
-            <button onclick="window.location.href='index.html'" class="interactive">Перейти на калькулятор ТО</button>
+            <button onclick="calculateTO()" class="interactive">Розрахувати</button>
+            <!-- Кнопка перехода на калькулятор ВТМ -->
+            <button onclick="window.location.href='vtm.html'" class="interactive">Перейти на калькулятор ВТМ</button>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
             <span class="close">&times;</span>
             <h3>Результати:</h3>
             <p id="modalResult100"></p>
-            <p id="modalResult98"></p>
+            <p id="modalResult95"></p>
             <p id="modalDaysWithToday"></p>
             <p id="modalDaysWithoutToday"></p>
             <p id="modalCurrentPercentage"></p>
@@ -62,7 +62,7 @@
             return value >= 1e6 ? (value / 1e6).toFixed(2) + 'M' : (value / 1e3).toFixed(2) + 'K';
         }
 
-        function calculateVTM() {
+        function calculateTO() {
             const plan = parseFloat(document.getElementById('plan').value);
             const fact = parseFloat(document.getElementById('fact').value);
 
@@ -73,7 +73,7 @@
 
             // Расчет оставшейся суммы, заменяем отрицательные значения на 0
             const remaining100 = Math.max(0, plan - fact);
-            const remaining98 = Math.max(0, (plan * 0.98) - fact);
+            const remaining95 = Math.max(0, (plan * 0.95) - fact);
 
             const today = new Date();
             const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
@@ -82,18 +82,18 @@
 
             const currentPercentage = plan === 0 ? 0 : ((fact / plan) * 100).toFixed(2);
 
-            const resultText = `ВТМ:\n` +
+            const resultText = `ТО:\n` +
                 `100%: - ${formatCurrency(remaining100)} грн.\n` +
-                `98%: - ${formatCurrency(remaining98)} грн.\n` +
-                `День (сегодня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
-                `День (без сегодня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
+                `95%: - ${formatCurrency(remaining95)} грн.\n` +
+                `День (з урах. сьог.): 95% - ${safeDivide(remaining95, daysLeftIncludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.\n` +
+                `День (без сьог.): 95% - ${safeDivide(remaining95, daysLeftExcludingToday)} грн., 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.\n` +
                 `Вик.: ${formatPercentage(currentPercentage)}`;
 
             document.getElementById('modalResult100').textContent = `Залишилось до 100%: ${remaining100.toFixed(2)} грн.`;
-            document.getElementById('modalResult98').textContent = `Залишилось до 98%: ${remaining98.toFixed(2)} грн.`;
+            document.getElementById('modalResult95').textContent = `Залишилось до 95%: ${remaining95.toFixed(2)} грн.`;
 
-            document.getElementById('modalDaysWithToday').textContent = `Сума на день (з урахуванням сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftIncludingToday)} грн. / 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.`;
-            document.getElementById('modalDaysWithoutToday').textContent = `Сума на день (без урахування сьогоднішнього дня): 98% - ${safeDivide(remaining98, daysLeftExcludingToday)} грн. / 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.`;
+            document.getElementById('modalDaysWithToday').textContent = `Сума на день (з урахуванням сьогоднішнього дня): 95% - ${safeDivide(remaining95, daysLeftIncludingToday)} грн. / 100% - ${safeDivide(remaining100, daysLeftIncludingToday)} грн.`;
+            document.getElementById('modalDaysWithoutToday').textContent = `Сума на день (без урахування сьогоднішнього дня): 95% - ${safeDivide(remaining95, daysLeftExcludingToday)} грн. / 100% - ${safeDivide(remaining100, daysLeftExcludingToday)} грн.`;
 
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${formatPercentage(currentPercentage)}`;
 
