@@ -15,7 +15,7 @@
             <label for="fact">Введіть факт (грн):</label>
             <input type="number" id="fact" placeholder="Факт" />
             <button onclick="calculateVTM()" class="interactive">Розрахувати</button>
-            <!-- Кнопка перехода на первую страницу -->
+            <!-- Кнопка перехода на калькулятор ТО -->
             <button onclick="window.location.href='index.html'" class="interactive">Перейти на калькулятор ТО</button>
         </div>
     </div>
@@ -54,17 +54,15 @@
             return denominator === 0 ? 0 : (numerator / denominator).toFixed(2);
         }
 
-        function formatPercentage(value) {
-            return `${value}%`;
-        }
-
         function formatCurrency(value) {
             return value >= 1e6 ? (value / 1e6).toFixed(2) + 'M' : (value / 1e3).toFixed(2) + 'K';
         }
 
-        function formatForViber(text) {
-            return text.replace(/%/g, "%25")
-                       .replace(/,/g, "%2C");
+        function encodeText(text) {
+            return encodeURIComponent(text)
+                .replace(/%20/g, ' ')
+                .replace(/%25/g, '%')
+                .replace(/%2C/g, ',');
         }
 
         function calculateVTM() {
@@ -86,7 +84,7 @@
 
             const currentPercentage = plan === 0 ? 0 : ((fact / plan) * 100).toFixed(2);
 
-            // Сокращение текста для мессенджеров
+            // Форматирование текста для отображения и мессенджеров
             const resultText = `ВТМ:\n` +
                 `До 100%: ${remaining100.toFixed(2)} грн.\n` +
                 `До 98%: ${remaining98.toFixed(2)} грн.\n` +
@@ -103,9 +101,9 @@
             document.getElementById('modalCurrentPercentage').textContent = `Виконання плану: ${currentPercentage}%`;
 
             // Обновление ссылок для поделиться
-            document.getElementById('share-viber').href = `viber://forward?text=${encodeURIComponent(formatForViber(resultText))}`;
-            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeURIComponent(resultText)}`;
-            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(resultText)}`;
+            document.getElementById('share-viber').href = `viber://forward?text=${encodeText(resultText)}`;
+            document.getElementById('share-telegram').href = `https://t.me/share/url?url=${encodeText(resultText)}`;
+            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodeText(resultText)}`;
 
             document.getElementById('resultModal').style.display = "block";
         }
