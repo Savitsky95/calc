@@ -10,11 +10,11 @@ html, body {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     background-image: url(./image/apteka-1200x580_LE_auto_x2.jpg);
     background-size: contain;
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
     background-color: #ffffff;
 }
@@ -267,7 +267,7 @@ html, body {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;;
     height: 100vh;
     background-image: url(./image/apteka-1200x580_LE_auto_x2.jpg);
     background-size: contain;
